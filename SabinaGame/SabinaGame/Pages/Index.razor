@@ -1,0 +1,78 @@
+﻿@page "/"
+@using System.Diagnostics
+@using System.Threading.Tasks
+@using SabinaGame.Data
+@using System.Numerics
+@inject SabinaGameService GameService
+
+
+<h1>Kunstwerke</h1>
+<div class="container">
+   
+    <div class="left-element">
+        <p role="status">Fertige Kunstwerke: @kunstwerke</p>
+    </div>
+    
+    <div class="right-element">
+        <button class="btn btn-primary" @onclick="game.incrementKunstwerkeManually">Click me</button>
+    </div>
+
+</div>
+
+<br /><br>
+
+   
+    @if (game.showAssistenten)
+    {
+   
+    <h1>Assistenten</h1>
+    <div class="container">
+
+        <div class="left-element">
+            <p role="status">Assistenten: @assistenten</p>
+        </div>
+
+        <div class="right-element">
+            <button class="btn btn-primary" @onclick="game.incrementAssistentenManually">Click me</button>
+        </div>
+
+    </div>
+    }
+
+
+
+  
+
+
+@code {
+    SabinaGameService game = new SabinaGameService();
+
+    String kunstwerke = "0";
+
+    String assistenten = "0";
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        game.setup();
+
+        while (true)
+        {
+            await Task.Delay(16);
+
+            if (game.games)
+            kunstwerke = game.kunstwerke();
+            assistenten = game.assistenten();
+
+            StateHasChanged();
+
+
+
+        }
+    }
+
+  
+
+
+}

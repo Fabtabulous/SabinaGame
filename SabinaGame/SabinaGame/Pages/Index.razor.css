@@ -1,0 +1,24 @@
+﻿h1 {
+    text-align: center;
+}
+
+.container {
+    position: relative;
+    min-width: 30rem;
+  
+    padding: 0;
+    margin: 0;
+}
+
+.left-element {
+    min-width: 10rem;
+    padding-right: 10rem;
+    display: inline-block;
+    float: left;
+}
+
+.right-element {
+    min-width: 10rem;
+    display: inline-block;
+    float: left;
+}
