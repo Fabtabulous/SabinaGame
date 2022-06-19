@@ -16,7 +16,7 @@
 		<ApplicationTitle>SabinaGame</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.sabinagame</ApplicationId>
+		<ApplicationId>com.fabutastic.sabinagame</ApplicationId>
 		<ApplicationIdGuid>25EAFDC6-E8A0-4AD5-BE32-705AFA6AA0DF</ApplicationIdGuid>
 
 		<!-- Versions -->

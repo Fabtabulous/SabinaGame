@@ -35,7 +35,7 @@
             </div>
 
             <div class="right-element">
-                <button class="btn btn-primary" @onclick="property.incrementManually">Kosten: @property.kostenString() @property.kostenTräger.name</button>
+                <button class="btn btn-primary" @onclick="property.incrementManually">Kosten: @property.kostenString() @property.KostenTräger.name</button>
             </div>
 
         </div>
@@ -62,10 +62,9 @@
 
         while (true)
         {
-            await Task.Delay(16);
+            await Task.Delay(33);
 
             game.tick();
-
             StateHasChanged();
 
 

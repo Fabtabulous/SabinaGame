@@ -12,7 +12,7 @@ public class Iterable
 
     public Stopwatch timer = new Stopwatch();
 
-    public long tickCount = 50000;
+    public long tickCount = 10000000;
 
     public BigInteger anzahl = 0;
 
@@ -26,6 +26,8 @@ public class Iterable
 
     public Iterable automatizer;
 
+    public BigInteger showAutomatizerWhen = 200;
+
 
     public Stopwatch Timer { get => timer; set => timer = value; }
     public long TickCount { get => tickCount; set => tickCount = value; }
@@ -36,6 +38,8 @@ public class Iterable
 
     public BigInteger Kosten { get => kosten; set => kosten = value; }
     public string Name { get => name; set => name = value; }
+    public BigInteger ShowAutomatizerWhen { get => showAutomatizerWhen; set => showAutomatizerWhen = value; }
+    public Iterable KostenTräger { get => kostenTräger; set => kostenTräger = value; }
 
     public override string ToString()
     {
@@ -85,10 +89,10 @@ public class Iterable
     public virtual void incrementManually()
     {
 
-        if (kostenTräger != null && kostenTräger.anzahl >= kosten)
+        if (KostenTräger != null && KostenTräger.anzahl >= kosten)
         {
 
-            kostenTräger.anzahl -= kosten;
+            KostenTräger.anzahl -= kosten;
             anzahl += 1;
 
         }
@@ -100,7 +104,7 @@ public class Iterable
     public virtual void checkShowAutomatizer()
     {
 
-        if (anzahl > 200)
+        if (anzahl > showAutomatizerWhen)
         {
 
             if (automatizer != null)
@@ -147,6 +151,22 @@ public class Kunstwerke : Iterable
 
 }
 
+public class KunstwerkeVerkauft : Iterable
+{
+
+    public KunstwerkeVerkauft()
+    {
+        name = "Kunstwerke verkauft";
+    }
+    public override string kostenString()
+    {
+
+
+        return "5";
+    }
+
+}
+
 public class Assistenten : Iterable
 {
 
@@ -154,10 +174,7 @@ public class Assistenten : Iterable
     {
         name = "Assistenten";
     }
-    public override string kostenString()
-    {
-        return "5";
-    }
+
 }
 
 public class Werbung : Iterable
@@ -182,5 +199,32 @@ public class Stuff : Iterable
 
 }
 
+public class MoreStuff : Iterable
+{
 
+    public MoreStuff()
+    {
+        name = "More stuff";
+    }
 
+}
+
+public class EvenMoreStuff : Iterable
+{
+
+    public EvenMoreStuff()
+    {
+        name = "Even more stuff";
+    }
+
+}
+
+public class EvenMoreEvenMoreStuff : Iterable
+{
+
+    public EvenMoreEvenMoreStuff()
+    {
+        name = "Even more even more stuff";
+    }
+
+}
