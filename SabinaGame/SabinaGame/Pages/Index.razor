@@ -10,35 +10,40 @@
 <div class="container">
    
     <div class="left-element">
-        <p role="status">Fertige Kunstwerke: @kunstwerke</p>
+        <p role="status">Fertige Kunstwerke: @gameState.kunstwerke.ToString()</p>
     </div>
     
     <div class="right-element">
-        <button class="btn btn-primary" @onclick="game.incrementKunstwerkeManually">Click me</button>
+        <button class="btn btn-primary" @onclick="gameState.kunstwerke.incrementManually">Kosten: Harte Arbeit</button>
     </div>
 
 </div>
 
 <br /><br>
 
+@foreach (Iterable property in gameState.properties) {
+
+
+    @if (property.show)
+        {
    
-    @if (game.showAssistenten)
-    {
-   
-    <h1>Assistenten</h1>
-    <div class="container">
+        <h1>@property.Name</h1>
+        <div class="container">
 
-        <div class="left-element">
-            <p role="status">Assistenten: @assistenten</p>
+            <div class="left-element">
+                <p role="status">@property.Name: @property.ToString()</p>
+            </div>
+
+            <div class="right-element">
+                <button class="btn btn-primary" @onclick="property.incrementManually">Kosten: @property.kostenString() @property.kostenTräger.name</button>
+            </div>
+
         </div>
+        <br />
+        <br>
+        }
 
-        <div class="right-element">
-            <button class="btn btn-primary" @onclick="game.incrementAssistentenManually">Click me</button>
-        </div>
-
-    </div>
-    }
-
+}
 
 
   
@@ -47,23 +52,22 @@
 @code {
     SabinaGameService game = new SabinaGameService();
 
-    String kunstwerke = "0";
-
-    String assistenten = "0";
-
+    SabinaGameState gameState;
 
 
     protected override async Task OnInitializedAsync()
     {
         game.setup();
+        gameState = game.gameState;
 
         while (true)
         {
             await Task.Delay(16);
 
-            if (game.games)
-            kunstwerke = game.kunstwerke();
-            assistenten = game.assistenten();
+            game.kunstwerke();
+            game.assistenten();
+            game.werbung();
+            game.stuff();
 
             StateHasChanged();
 

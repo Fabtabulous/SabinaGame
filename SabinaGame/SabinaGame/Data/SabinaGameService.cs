@@ -9,21 +9,9 @@ public class SabinaGameService
 {
 
 
-    private SabinaGameState gameState = new SabinaGameState();
-
+    public SabinaGameState gameState = new SabinaGameState();
 
     private SabinaGameBigIntStuff bigIntStuff = new SabinaGameBigIntStuff();
-
-    private Stopwatch kunstwerkTimer = new Stopwatch();
-
-    private long kunstwerkTick = 5000000;
-
-    private long assistentenTick = 5000000;
-
-    public Boolean showAssistenten = false;
-
-
-    private Stopwatch assistentenTimer = new Stopwatch();
 
 
 
@@ -31,58 +19,63 @@ public class SabinaGameService
     public void setup()
     {
 
-        gameState.kunstwerke = BigInteger.Zero;
-        gameState.fähigkeit = 1;
-        gameState.assistentenGehalt = 500;
-        checkAssistenten();
-        kunstwerkTimer.Start();
-       
+        gameState.kunstwerke = new Kunstwerke();
+        gameState.assistenten = new Assistenten();
+        gameState.werbung = new Werbung();
+        gameState.stuff = new Stuff();
 
-    }
+        gameState.kunstwerke.name = "Kunstwerke";
+        gameState.assistenten.name = "Assistenten";
+        gameState.werbung.name = "Werbung";
+        gameState.stuff.name = "Stuff";
 
-    public String assistenten()
-    {
+        gameState.kunstwerke.automatizer = gameState.assistenten;
+        gameState.assistenten.kostenTräger = gameState.kunstwerke;
+        gameState.assistenten.automatizer = gameState.werbung;
+        gameState.werbung.kostenTräger = gameState.assistenten;
+        gameState.werbung.automatizer = gameState.stuff;
+        gameState.stuff.kostenTräger = gameState.werbung;
+  
 
-        incrementAssistenten();
+        gameState.kunstwerke.timer.Start();
+        gameState.assistenten.timer.Start();
+        gameState.werbung.timer.Start();
+        gameState.stuff.timer.Start();
 
-        return gameState.assistenten.ToString();
 
-    }
-
-    public void incrementAssistenten()
-    {
-
-        if (assistentenTimer.ElapsedTicks > assistentenTick && gameState.rekrutierer > 0)
-
-        {
-
-            gameState.assistenten++;
-            assistentenTimer.Restart();
-
-        }
-
-    }
-
-    public void incrementAssistentenManually()
-    {
-
-        if (gameState.kunstwerke >= gameState.assistentenGehalt)
-        {
-
-            gameState.kunstwerke -= gameState.assistentenGehalt;
-            gameState.assistenten += 1;
-
-        }
         
+
+
+
     }
 
-    public void checkAssistenten()
+    public void kunstwerke()
     {
 
-        if (gameState.kunstwerke >= 200)
-        {
-            showAssistenten = true;
-        }
+        gameState.kunstwerke.tick();
+
+
+    }
+
+ 
+    public void assistenten()
+    {
+       
+        gameState.assistenten.tick();
+
+    }
+
+    public void werbung()
+    {
+
+        gameState.werbung.tick();
+
+    }
+
+    public void stuff()
+    {
+
+        gameState.stuff.tick();
 
     }
 

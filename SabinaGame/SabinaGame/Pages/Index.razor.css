@@ -11,14 +11,13 @@
 }
 
 .left-element {
-    min-width: 10rem;
-    padding-right: 10rem;
+    min-width: 0rem;
     display: inline-block;
     float: left;
 }
 
 .right-element {
-    min-width: 10rem;
+    min-width: 0rem;
     display: inline-block;
-    float: left;
+    float: right;
 }

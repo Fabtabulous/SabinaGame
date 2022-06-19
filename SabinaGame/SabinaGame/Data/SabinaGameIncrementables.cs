@@ -6,16 +6,36 @@ namespace SabinaGame.Data;
 
 public class Iterable
 {
+    public String name;
 
-    private Stopwatch timer = new Stopwatch();
+    public SabinaGameBigIntStuff bigIntStuff = new SabinaGameBigIntStuff();
 
-    private long tickCount = 5000000;
+    public Stopwatch timer = new Stopwatch();
 
-    private BigInteger anzahl = 0;
+    public long tickCount = 50000;
+
+    public BigInteger anzahl = 0;
+
+    public BigInteger fähigkeit = 1;
+
+    public BigInteger kosten = 500;
+
+    public Boolean show = false;
+
+    public Iterable kostenTräger;
+
+    public Iterable automatizer;
+
 
     public Stopwatch Timer { get => timer; set => timer = value; }
     public long TickCount { get => tickCount; set => tickCount = value; }
     public BigInteger Anzahl { get => anzahl; set => anzahl = value; }
+    public BigInteger Fähigkeit { get => fähigkeit; set => fähigkeit = value; }
+    public bool Show { get => show; set => show = value; }
+    public Iterable Automatizer { get => automatizer; set => automatizer = value; }
+
+    public BigInteger Kosten { get => kosten; set => kosten = value; }
+    public string Name { get => name; set => name = value; }
 
     public override string ToString()
     {
@@ -24,24 +44,68 @@ public class Iterable
 
     }
 
-    public string tick()
+    public virtual string kostenString()
+    {
+
+        return kosten.ToString();
+    }
+
+
+    public void tick()
     {
 
         increment();
 
-        return this.ToString();
+
     }
 
     public void increment()
     {
+        long tickDecrementable = timer.ElapsedTicks;
 
-        if (timer.ElapsedTicks > timer.ElapsedTicks && gameState.assistenten > 0)
+        if (tickDecrementable > tickCount)
+        {
+            while (automatizer != null && Automatizer.anzahl > 0 && tickDecrementable > tickCount)
 
+            {
+
+                anzahl += Automatizer.anzahl;
+                tickDecrementable -= tickCount;
+
+
+            }
+            checkShowAutomatizer();
+            timer.Restart();
+        }
+
+    }
+
+
+    public void incrementManually()
+    {
+
+        if (kostenTräger != null && kostenTräger.anzahl >= kosten)
         {
 
-            gameState.kunstwerke += gameState.assistenten;
-            kunstwerkTimer.Restart();
+            kostenTräger.anzahl -= kosten;
+            anzahl += 1;
 
+        }
+
+        checkShowAutomatizer();
+
+    }
+
+    public void checkShowAutomatizer()
+    {
+
+        if (anzahl > 200)
+        {
+
+            if (automatizer != null)
+            {
+                automatizer.show = true;
+            }
 
         }
 
@@ -51,63 +115,51 @@ public class Iterable
 
 }
 
-private string toComma(BigInteger bigInt)
+public class Kunstwerke : Iterable
 {
-
-    return bigIntStuff.bigIntegerWithComma(bigInt);
-
-}
-public String kunstwerke()
-{
-    incrementKunstwerke();
-
-    return toComma(gameState.kunstwerke);
-
-}
-
-
-
-public void incrementKunstwerke()
-{
-
-    if (kunstwerkTimer.ElapsedTicks > kunstwerkTick && gameState.assistenten > 0)
-
+    public string toComma(BigInteger bigInt)
     {
 
-        gameState.kunstwerke += gameState.assistenten;
-        kunstwerkTimer.Restart();
+        return bigIntStuff.bigIntegerWithComma(bigInt);
+
+    }
+
+    public override string ToString()
+    {
+        return toComma(anzahl);
+    }
+
+
+    new public void incrementManually()
+    {
+        anzahl += Fähigkeit;
+        checkShowAutomatizer();
 
 
     }
 
 }
 
-
-public void incrementKunstwerkeManually()
+public class Assistenten : Iterable
 {
-    gameState.kunstwerke += gameState.fähigkeit;
-    checkAssistenten();
+    public override string kostenString()
+    {
+        return "5";
+    }
+}
 
+public class Werbung : Iterable
+{
 
 }
 
-public class iterable
+public class Stuff : Iterable
 {
-	public DateTime lastOpened { get; set; }
 
-	public long tick { get; set; }
-
-	public BigInteger kunstwerke { get; set; }
-
-    public BigInteger fähigkeit { get; set; }
-
-    public BigInteger assistenten { get; set; }
-
-	public BigInteger assistentenGehalt { get; set; }
-
-	public BigInteger rekrutierer { get; set; }
-
-
-
-	
 }
+
+
+
+
+
+
