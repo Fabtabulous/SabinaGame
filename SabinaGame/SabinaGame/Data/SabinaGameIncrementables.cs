@@ -48,10 +48,11 @@ public class Iterable
     {
 
         return kosten.ToString();
+
     }
 
 
-    public void tick()
+    public virtual void tick()
     {
 
         increment();
@@ -59,7 +60,7 @@ public class Iterable
 
     }
 
-    public void increment()
+    public virtual void increment()
     {
         long tickDecrementable = timer.ElapsedTicks;
 
@@ -81,7 +82,7 @@ public class Iterable
     }
 
 
-    public void incrementManually()
+    public virtual void incrementManually()
     {
 
         if (kostenTräger != null && kostenTräger.anzahl >= kosten)
@@ -96,7 +97,7 @@ public class Iterable
 
     }
 
-    public void checkShowAutomatizer()
+    public virtual void checkShowAutomatizer()
     {
 
         if (anzahl > 200)
@@ -117,6 +118,12 @@ public class Iterable
 
 public class Kunstwerke : Iterable
 {
+
+    public Kunstwerke()
+    {
+        name = "Kunstwerke";
+    }
+
     public string toComma(BigInteger bigInt)
     {
 
@@ -130,7 +137,7 @@ public class Kunstwerke : Iterable
     }
 
 
-    new public void incrementManually()
+    public override void incrementManually()
     {
         anzahl += Fähigkeit;
         checkShowAutomatizer();
@@ -142,6 +149,11 @@ public class Kunstwerke : Iterable
 
 public class Assistenten : Iterable
 {
+
+    public Assistenten()
+    {
+        name = "Assistenten";
+    }
     public override string kostenString()
     {
         return "5";
@@ -151,15 +163,24 @@ public class Assistenten : Iterable
 public class Werbung : Iterable
 {
 
+    public Werbung()
+    {
+
+        name = "Werbung";
+
+    }
+
 }
 
 public class Stuff : Iterable
 {
 
+    public Stuff()
+    {
+        name = "Stuff";
+    }
+
 }
-
-
-
 
 
 

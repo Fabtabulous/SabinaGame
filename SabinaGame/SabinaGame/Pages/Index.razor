@@ -64,13 +64,9 @@
         {
             await Task.Delay(16);
 
-            game.kunstwerke();
-            game.assistenten();
-            game.werbung();
-            game.stuff();
+            game.tick();
 
             StateHasChanged();
-
 
 
         }

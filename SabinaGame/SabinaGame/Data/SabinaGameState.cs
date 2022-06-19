@@ -19,15 +19,29 @@ public class SabinaGameState
 
 	public SabinaGameState()
 	{
-		Kunstwerke kunstwerke = new Kunstwerke();
+		kunstwerke = new Kunstwerke();
 		properties.Add(kunstwerke);
-		Assistenten assistenten = new Assistenten();
+		kunstwerke.timer.Start();
+
+		assistenten = new Assistenten();
 		properties.Add(assistenten);
-		Stuff stuff = new Stuff();
+		assistenten.timer.Start();
+
+		stuff = new Stuff();
 		properties.Add(stuff);
-		Werbung werbung = new Werbung();
+		stuff.timer.Start();
+
+		werbung = new Werbung();
 		properties.Add(werbung);
+		werbung.timer.Start();
+
+		kunstwerke.automatizer = assistenten;
+		assistenten.kostenTräger = kunstwerke;
+		assistenten.automatizer = werbung;
+		werbung.kostenTräger = assistenten;
+		werbung.automatizer = stuff;
+		stuff.kostenTräger = werbung;
 
 
-	}
+    }
 }
