@@ -4,6 +4,7 @@
 @using SabinaGame.Data
 @using System.Numerics
 @inject SabinaGameService GameService
+@inject SabinaGameState GameState
 
 
 <h1>Kunstwerke</h1>
@@ -12,6 +13,8 @@
     <div class="left-element">
         <p role="status">Fertige Kunstwerke: @gameState.kunstwerke.ToString()</p>
     </div>
+
+
     
     <div class="right-element">
         <button class="btn btn-primary" @onclick="gameState.kunstwerke.incrementManually">Kosten: Harte Arbeit</button>
@@ -21,8 +24,11 @@
 
 <br /><br>
 
+
 @foreach (Iterable property in gameState.properties) {
 
+
+    
 
     @if (property.show)
         {
@@ -53,7 +59,8 @@
     SabinaGameService game = new SabinaGameService();
 
     SabinaGameState gameState;
-
+    
+    
 
     protected override async Task OnInitializedAsync()
     {
@@ -69,6 +76,11 @@
 
 
         }
+    }
+
+    void ButtonClicked()
+    {
+        //
     }
 
   

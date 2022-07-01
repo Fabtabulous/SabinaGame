@@ -12,13 +12,13 @@ public class Iterable
 
     public Stopwatch timer = new Stopwatch();
 
-    public long tickCount = 10000000;
+    public long tickCount = 100000;
 
     public BigInteger anzahl = 0;
 
     public BigInteger fähigkeit = 1;
 
-    public BigInteger kosten = 500;
+    public BigInteger kosten = 30;
 
     public Boolean show = false;
 
@@ -26,7 +26,7 @@ public class Iterable
 
     public Iterable automatizer;
 
-    public BigInteger showAutomatizerWhen = 200;
+    public BigInteger showAutomatizerWhen = 10;
 
 
     public Stopwatch Timer { get => timer; set => timer = value; }

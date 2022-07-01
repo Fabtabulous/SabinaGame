@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.WebView.Maui;
 using SabinaGame.Data;
+using Radzen;
 
 namespace SabinaGame;
 
@@ -22,7 +23,13 @@ public static class MauiProgram
 		
 		builder.Services.AddSingleton<WeatherForecastService>();
 		builder.Services.AddSingleton<SabinaGameService>();
+        builder.Services.AddSingleton<SabinaGameState>();
 
-		return builder.Build();
+        builder.Services.AddScoped<DialogService>();
+        builder.Services.AddScoped<NotificationService>();
+        builder.Services.AddScoped<TooltipService>();
+        builder.Services.AddScoped<ContextMenuService>();
+
+        return builder.Build();
 	}
 }
